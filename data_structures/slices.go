@@ -4,12 +4,21 @@ type mapOperation func(int32) int32
 type filterOperation func(int32) bool
 
 func mapInts(op mapOperation, vals []int32) []int32 {
-	return []int32{}
-
+	result := make([]int32, 0, 0)
+	for _, item := range vals {
+		result = append(result, op(item))
+	}
+	return result
 }
 
 func filterInts(op filterOperation, vals []int32) []int32 {
-	return []int32{3}
+	result := make([]int32, 0, 0)
+	for _, item := range vals {
+		if op(item) {
+			result = append(result, item)
+		}
+	}
+	return result
 }
 
 func concatenate(dest []string, newValues ...string) []string {
